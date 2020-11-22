@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    restart: always
+    tty: true
+    volumes:
+      - .:/home/node/angular-state-example/
+      - nodemodules:/home/node/angular-state-example/node_modules/
+      - ~/.ssh/agent.sock:/ssh-agent
+    ports:
+      - 4200:4200
+    command: ng serve --host 0.0.0.0
+    environment:
+      SSH_AUTH_SOCK: /ssh-agent
+
+volumes:
+  nodemodules:

@@ -1,0 +1,16 @@
+{
+  "name": "Angular State Example",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/home/node/angular-state-example",
+  "extensions": [
+    "angular.ng-template",
+    "cyrilletuzi.angular-schematics",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ],
+  "settings": {
+    "editor.tabSize": 4,
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "shutdownAction": "stopCompose"
+}
