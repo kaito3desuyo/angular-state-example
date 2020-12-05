@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onClickAdd()">
+    <input type="text" formControlName="title" />
+    <button type="submit">追加</button>
+</form>
+<div>
+    <input
+        #onlyViewNotDone
+        type="checkbox"
+        id="onlyViewNotDone"
+        name="onlyViewNotDone"
+        (change)="onChangeOnlyViewNotDone(onlyViewNotDone.checked)"
+    />
+    <label for="onlyViewNotDone">未完了のみ</label>
+</div>
+<ul>
+    <li *ngFor="let todo of list$ | async">
+        <div>
+            {{ todo.title }}
+            <button
+                type="button"
+                *ngIf="!todo.done"
+                (click)="onClickMarkAsDone(todo)"
+            >
+                完了
+            </button>
+            <button
+                type="button"
+                *ngIf="!!todo.done"
+                (click)="onClickMarkAsUndone(todo)"
+            >
+                未完了
+            </button>
+            <button type="button" (click)="onClickRemove(todo)">削除</button>
+        </div>
+    </li>
+</ul>
+<pre><code>{{list$ | async | json}}</code></pre>
