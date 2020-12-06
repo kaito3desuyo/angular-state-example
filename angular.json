@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "angular-state-example"
+  "defaultProject": "angular-state-example",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

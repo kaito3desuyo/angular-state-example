@@ -16,6 +16,13 @@ const routes: Routes = [
                 (m) => m.RxjsStateModule
             ),
     },
+    {
+        path: 'ngrx-state',
+        loadChildren: () =>
+            import('./ngrx-state/ngrx-state.module').then(
+                (m) => m.NgrxStateModule
+            ),
+    },
 ];
 
 @NgModule({
