@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { stateful } from '@rx-angular/state';
 import { combineLatest, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 import { Todo } from '../types/todo';
 import {
@@ -23,18 +24,7 @@ export class AkitaStateComponent implements OnInit, OnDestroy {
         this._subscription.add(sub);
     }
 
-    list$ = combineLatest([
-        this.query.todos$,
-        this.componentQuery.onlyViewNotDone$,
-    ]).pipe(
-        map(([todos, onlyViewNotDone]) => {
-            if (onlyViewNotDone) {
-                return todos.filter((o) => !o.done);
-            } else {
-                return todos;
-            }
-        })
-    );
+    list$ = this.componentQuery.list$;
 
     form = this.fb.group({
         title: [''],
@@ -48,7 +38,27 @@ export class AkitaStateComponent implements OnInit, OnDestroy {
         private readonly componentQuery: AkitaStateComponentQuery
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.subscription = combineLatest([
+            this.query.todos$,
+            this.componentQuery.onlyViewNotDone$,
+        ])
+            .pipe(
+                delay(0),
+                tap(([todos, onlyViewNotDone]) => {
+                    if (onlyViewNotDone) {
+                        this.componentStore.update({
+                            list: todos.filter((o) => !o.done),
+                        });
+                    } else {
+                        this.componentStore.update({
+                            list: todos,
+                        });
+                    }
+                })
+            )
+            .subscribe();
+    }
 
     onClickAdd(): void {
         this.store.add({

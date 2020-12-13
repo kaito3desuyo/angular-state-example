@@ -30,6 +30,7 @@ const routes: Routes = [
                 (m) => m.AkitaStateModule
             ),
     },
+    { path: 'rx-angular-state', loadChildren: () => import('./rx-angular-state/rx-angular-state.module').then(m => m.RxAngularStateModule) },
 ];
 
 @NgModule({
