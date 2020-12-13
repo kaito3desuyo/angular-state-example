@@ -23,6 +23,13 @@ const routes: Routes = [
                 (m) => m.NgrxStateModule
             ),
     },
+    {
+        path: 'akita-state',
+        loadChildren: () =>
+            import('./akita-state/akita-state.module').then(
+                (m) => m.AkitaStateModule
+            ),
+    },
 ];
 
 @NgModule({

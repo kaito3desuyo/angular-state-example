@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
     imports: [
         CommonModule,
         StoreModule.forRoot(reducers, { metaReducers }),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        //!environment.production ? StoreDevtoolsModule.instrument() : [],
     ],
 })
 export class AppStoreModule {}

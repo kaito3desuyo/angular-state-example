@@ -126,6 +126,6 @@
   },
   "defaultProject": "angular-state-example",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "defaultCollection": "@datorama/akita"
   }
 }
