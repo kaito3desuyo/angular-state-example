@@ -3,12 +3,12 @@ import { FormBuilder } from '@angular/forms';
 import { RxState } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { v4 as uuid } from 'uuid';
 import { Todo } from '../types/todo';
 import {
     GLOBAL_RX_STATE,
     RxAngularGlobalState,
 } from './store/rx-angular-state.state';
-import { v4 as uuid } from 'uuid';
 
 interface State {
     list: Todo[];
